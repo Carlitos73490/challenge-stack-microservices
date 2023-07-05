@@ -1,0 +1,40 @@
+version: '3.8'
+services:
+  postgres:
+    image: postgres:latest
+    restart: always
+    environment:
+      - POSTGRES_USER=carl
+      - POSTGRES_PASSWORD=1234
+    volumes:
+      - postgres:/var/lib/postgresql/data
+    ports:
+      - '5432:5432'
+  nest-js-bun:
+    image: nest-js-bun
+    build:
+      context: ./nest-js-base
+      dockerfile:
+        DockerfileBun
+    ports:
+      - '3000:3000'
+  nest-js-deno:
+    image: nest-js-deno
+    build:
+      context: ./nest-js-base
+      dockerfile:
+        DockerfileDeno
+    ports:
+      - '3001:3000'
+  nest-js-node:
+    image: nest-js-node
+    build:
+      context: ./nest-js-base
+      dockerfile:
+        DockerfileNode
+    ports:
+      - '3002:3000'
+
+
+volumes:
+  postgres:

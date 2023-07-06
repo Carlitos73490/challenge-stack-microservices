@@ -24,7 +24,9 @@
   },
   "type": "module",
   "dependencies": {
+    "@grpc/grpc-js": "^1.8.17",
     "@popperjs/core": "^2.11.8",
+    "@protobuf-ts/grpc-transport": "^2.9.0",
     "@protobuf-ts/runtime-rpc": "^2.9.0",
     "flowbite": "^1.7.0",
     "flowbite-svelte": "^0.39.2",

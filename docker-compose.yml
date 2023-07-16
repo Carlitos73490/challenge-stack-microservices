@@ -1,5 +1,6 @@
 version: '3.8'
 services:
+
   postgres:
     image: postgres:latest
     restart: always
@@ -10,22 +11,8 @@ services:
       - postgres:/var/lib/postgresql/data
     ports:
       - '5432:5432'
-  nest-js-bun:
-    image: nest-js-bun
-    build:
-      context: ./nest-js-base
-      dockerfile:
-        DockerfileBun
-    ports:
-      - '5000:5000'
-  nest-js-deno:
-    image: nest-js-deno
-    build:
-      context: ./nest-js-base
-      dockerfile:
-        DockerfileDeno
-    ports:
-      - '5001:5000'
+    networks:
+      - default
   nest-js-node:
     image: nest-js-node
     build:
@@ -33,8 +20,28 @@ services:
       dockerfile:
         DockerfileNode
     ports:
+      - '5000:5000'
+
+  nest-js-bun:
+    image: nest-js-bun
+    build:
+      context: ./nest-js-base
+      dockerfile:
+        DockerfileBun
+    ports:
+      - '5001:5000'
+
+  nest-js-deno:
+    image: nest-js-deno
+    build:
+      context: ./nest-js-base
+      dockerfile:
+        DockerfileDeno
+    ports:
       - '5002:5000'
+
   svelte-client:
+
     image: svelte-client
     build:
       context: ./svelte-client
@@ -42,13 +49,17 @@ services:
         Dockerfile
     ports:
       - '5173:5173'
-  auth-api:
-    image: mohammaddocker/tm-auth-api
-    environment:
-      - POSTGRES_USER=carl
-      - POSTGRES_PASSWORD=1234
+
+  light-auth-api:
+
+    image: light-auth-api
+    build:
+      context: ./light-auth-api
+      dockerfile:
+        Dockerfile
     ports:
-     - '4000:4000'
+      - '5010:5010'
 
 volumes:
   postgres:
+

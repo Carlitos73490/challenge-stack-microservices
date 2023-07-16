@@ -5,7 +5,11 @@ import {ChannelCredentials} from "@grpc/grpc-js";
 
 /** @type {import('./$types').PageLoad} */
 export async function load() {
-
+return {
+    bunPort : process.env.NEST_JS_BUN_API_PORT,
+    denoPort : process.env.NEST_JS_DENO_API_PORT,
+    nodeJsPort : process.env.NEST_JS_NODEJS_API_PORT
+}
 
 }
 

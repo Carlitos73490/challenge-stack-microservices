@@ -5,8 +5,16 @@ managed:
 plugins:
   - plugin: buf.build/community/timostamm-protobuf-ts
     out: ../svelte-client/src/stubs
+  - plugin: buf.build/community/timostamm-protobuf-ts
+    out: ../nest-js-base/src/client-stubs
   - plugin: buf.build/community/stephenh-ts-proto
     out: ../nest-js-base/src/stubs
+    opt:
+      - addGrpcMetadata=true
+      - nestJs=true
+      - useOptionals=all
+  - plugin: buf.build/community/stephenh-ts-proto
+    out: ../light-auth-api/src/stubs
     opt:
       - addGrpcMetadata=true
       - nestJs=true

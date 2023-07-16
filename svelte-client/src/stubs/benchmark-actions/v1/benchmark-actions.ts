@@ -20,6 +20,10 @@ export interface BigArrayProcessRequest {
      * @generated from protobuf field: int32 arraySize = 1;
      */
     arraySize: number;
+    /**
+     * @generated from protobuf field: string token = 2;
+     */
+    token: string;
 }
 /**
  * @generated from protobuf message benchmarkActions.BigArrayProcessResponse
@@ -52,11 +56,12 @@ export interface BigDbFetchResponse {
 class BigArrayProcessRequest$Type extends MessageType<BigArrayProcessRequest> {
     constructor() {
         super("benchmarkActions.BigArrayProcessRequest", [
-            { no: 1, name: "arraySize", kind: "scalar", T: 5 /*ScalarType.INT32*/ }
+            { no: 1, name: "arraySize", kind: "scalar", T: 5 /*ScalarType.INT32*/ },
+            { no: 2, name: "token", kind: "scalar", T: 9 /*ScalarType.STRING*/ }
         ]);
     }
     create(value?: PartialMessage<BigArrayProcessRequest>): BigArrayProcessRequest {
-        const message = { arraySize: 0 };
+        const message = { arraySize: 0, token: "" };
         globalThis.Object.defineProperty(message, MESSAGE_TYPE, { enumerable: false, value: this });
         if (value !== undefined)
             reflectionMergePartial<BigArrayProcessRequest>(this, message, value);
@@ -69,6 +74,9 @@ class BigArrayProcessRequest$Type extends MessageType<BigArrayProcessRequest> {
             switch (fieldNo) {
                 case /* int32 arraySize */ 1:
                     message.arraySize = reader.int32();
+                    break;
+                case /* string token */ 2:
+                    message.token = reader.string();
                     break;
                 default:
                     let u = options.readUnknownField;
@@ -85,6 +93,9 @@ class BigArrayProcessRequest$Type extends MessageType<BigArrayProcessRequest> {
         /* int32 arraySize = 1; */
         if (message.arraySize !== 0)
             writer.tag(1, WireType.Varint).int32(message.arraySize);
+        /* string token = 2; */
+        if (message.token !== "")
+            writer.tag(2, WireType.LengthDelimited).string(message.token);
         let u = options.writeUnknownFields;
         if (u !== false)
             (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);

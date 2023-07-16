@@ -3,8 +3,6 @@
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/light-auth-api" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/light-auth-api-23/light-auth-api" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/light-auth-api/light-auth-api" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/nest-js-base" vcs="Git" />
   </component>
 </project>

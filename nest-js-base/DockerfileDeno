@@ -1,0 +1,13 @@
+FROM denoland/deno:latest
+
+WORKDIR /app
+
+ADD . /app/
+
+RUN deno install
+
+
+CMD deno run start
+
+EXPOSE 5001
+VOLUME /app

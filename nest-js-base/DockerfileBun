@@ -1,0 +1,10 @@
+FROM oven/bun:latest
+
+WORKDIR /app
+
+ADD . /app/
+
+CMD bun run start:prod
+
+EXPOSE 5002
+VOLUME /app

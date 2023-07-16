@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+package benchmarkActions;
+
+service BenchmarkActionsService {
+  // Unary
+  rpc BigArrayProcess (BigArrayProcessRequest) returns (BigArrayProcessResponse);
+
+  rpc BigDbFetch (BigDbFetchRequest) returns (BigDbFetchResponse);
+
+}
+
+
+message BigArrayProcessRequest{
+  int32 arraySize = 1;
+  string token = 2;
+}
+message BigArrayProcessResponse{
+  string elapsedTime = 1;
+}
+
+
+message BigDbFetchRequest{
+}
+message BigDbFetchResponse{
+  string elapsedTime = 1;
+  string resultCount = 2;
+}

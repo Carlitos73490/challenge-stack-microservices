@@ -17,14 +17,11 @@
 
     let defaultArraySize = 1000
 
+
     /** @type {import('./$types').ActionData} */
-    export let authForm = {};
-    /** @type {import('./$types').ActionData} */
-    export let form = {};
-    /** @type {import('./$types').ActionData} */
-    export let form2 = {};
-    /** @type {import('./$types').ActionData} */
-    export let form3 = {};
+    export let form;
+
+
 </script>
 <Navbar let:toggle>
     <NavBrand href="/">
@@ -38,16 +35,17 @@
     </NavUl>
 </Navbar>
 <div>
-    <h1>Login </h1>
     <form method="POST" >
         <Label for="email" class="mb-2" >Email</Label>
         <Input type="text" id="email" name="email" placeholder="carl@icloud.com" required  />
         <Label for="password" class="mb-2" >Password</Label>
         <Input type="password" id="password" name="password" placeholder="1234"  required  />
-        <button color="purpleToBlue" formaction="?/login" >Login</button>
+        <Input type="hidden" id="formId" name="formId" value="loginForm" hidden/>
+
+        <button color="purpleToBlue" formaction="?/lightAuth" >Login</button>
     </form>
-    {#if authForm?.success}
-        <p>Current Token {authForm.token}</p>
+    {#if form?.success}
+        <p>Current Token : {form.token}</p>
         <div class="p-2 flex justify-evenly w-full">
             <Card>
                 <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">NestJs NodeJs</h5>
@@ -58,13 +56,17 @@
                     <Label for="size" class="mb-2" >Array Size</Label>
                     <Input type="number" id="size" name="size" placeholder="10000" bind:value={defaultArraySize} required  />
                     <Label for="size" class="mb-2" >Port</Label>
-                    <Input type="number" id="port" name="port" placeholder="5000" bind:value={data.nodeJsPort} required  />
+                    <Input type="number" id="port" name="port"  bind:value={data.nodeJsPort} required  />
+                    <Input type="hidden" id="formId" name="formId" value="node" />
+                    <Input type="hidden" id="token" name="token" value="{form.token}" hidden/>
+
+
                     <button color="purpleToBlue" formaction="?/bigArrayProcess" >Launch GRPC Request</button>
                 </form>
-                {#if form3?.success}
+                {#if form?.success && form?.formId == "node"}
                     <!-- this message is ephemeral; it exists because the page was rendered in
                            response to a form submission. it will vanish if the user reloads -->
-                    <Textarea id="textarea-id" placeholder="Results" rows="4" name="message" bind:value={form3.elapsedTime}/>
+                    <Textarea id="textarea-id" placeholder="Results" rows="4" name="message" bind:value={form.elapsedTime}/>
                 {/if}
             </Card>
             <Card>
@@ -76,10 +78,11 @@
                     <Label for="size" class="mb-2" >Array Size</Label>
                     <Input type="number" id="size" name="size" placeholder="10000" bind:value={defaultArraySize} required  />
                     <Label for="size" class="mb-2" >Port</Label>
-                    <Input type="number" id="port" name="port" placeholder="5000" bind:value={data.bunPort} required  />
+                    <Input type="number" id="port" name="port"  bind:value={data.bunPort} required  />
+                    <Input type="hidden" id="formId" name="formId" value="bun" hidden/>
                     <button color="purpleToBlue" formaction="?/bigArrayProcess" >Launch GRPC Request</button>
                 </form>
-                {#if form?.success}
+                {#if form?.success && form?.formId == "bun"}
                     <!-- this message is ephemeral; it exists because the page was rendered in
                            response to a form submission. it will vanish if the user reloads -->
                     <Textarea id="textarea-id" placeholder="Results" rows="4" name="message" bind:value={form.elapsedTime}/>
@@ -94,17 +97,21 @@
                     <Label for="size" class="mb-2" >Array Size</Label>
                     <Input type="number" id="size" name="size" placeholder="10000" bind:value={defaultArraySize} required  />
                     <Label for="size" class="mb-2" >Port</Label>
-                    <Input type="number" id="port" name="port" placeholder="5000" bind:value={data.denoPort} required  />
+                    <Input type="number" id="port" name="port"  bind:value={data.denoPort} required  />
+                    <Input type="hidden" id="formId" name="formId" value="deno" hidden/>
+
                     <button color="purpleToBlue" formaction="?/bigArrayProcess" >Launch GRPC Request</button>
                 </form>
-                {#if form2?.success}
+                {#if form?.success && form?.formId == "deno"}
                     <!-- this message is ephemeral; it exists because the page was rendered in
                            response to a form submission. it will vanish if the user reloads -->
-                    <Textarea id="textarea-id" placeholder="Results" rows="4" name="message" bind:value={form2.elapsedTime}/>
+                    <Textarea id="textarea-id" placeholder="Results" rows="4" name="message" bind:value={form.elapsedTime}/>
                 {/if}
             </Card>
 
         </div>
     {/if}
+
 </div>
+
 

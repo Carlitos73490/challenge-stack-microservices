@@ -13,13 +13,17 @@ return {
 }
 }
 
+
+
+
 /** @type {import('./$types').Actions} */
 export const actions = {
-    login: async ({ cookies, request }) => {
+    lightAuth: async ({ cookies, request  }: any) => {
         const data = await request.formData();
 
         const email = data.get('email');
         const password = data.get('password');
+        const formId = data.get('formId');
 
         // setup a transport and create a client instance
         let transport = new GrpcTransport({
@@ -29,13 +33,14 @@ export const actions = {
         let client = new AuthActionsServiceClient(transport);
         let {response} = await client.login({email : email,password});
 
-        return {token : response.token, success: true };
+        return {success: true,token : response.token,formId : formId };
     },
     bigArrayProcess:  async ({ cookies, request } : any)  => {
         const data = await request.formData();
         const size = parseInt(data.get('size'));
         const port = data.get('port');
         const token = data.get('token');
+        const formId = data.get('formId');
 
         // setup a transport and create a client instance
         let transport = new GrpcTransport({
@@ -45,10 +50,8 @@ export const actions = {
         let client = new BenchmarkActionsServiceClient(transport);
         let {response} = await client.bigArrayProcess({arraySize: size,token : token});
 
-        return {elapsedTime : response.elapsedTime, success: true };
+        return {elapsedTime : response.elapsedTime, success: true,formId : formId };
     },
-    bigDbFetch: async (event : any) => {
-        // TODO
-    }
+
 };
 
